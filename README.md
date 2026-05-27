@@ -55,9 +55,7 @@ npm run dev
 ## 🏗️ 技术架构
 
 ```
-前端(React) -> 后端代理层 -> 模型适配器 -> 各厂商API
-                       ->
-                 规则引擎 -> 报告生成
+前端(React) -> 后端代理层 -> 模型适配器 -> 各厂商API -> 规则引擎 -> 报告生成
 ```
 
 核心设计：
@@ -141,8 +139,9 @@ aipm-bench/
 
 ## 📄 文档
 
-- [BRD - 商业需求文档](./docs/BRD.md)
-- [PRD - 产品需求文档](./docs/PRD.md)
+- [AIPM Bench BRD.pdf](https://www.notion.so/AIPM-Bench-BRD-c31b1317da604ca79deda424be0fa667?source=copy_link)
+- [AIPM Bench PRD.pdf](https://www.notion.so/AIPM-Bench-PRD-48e3f7328ef14f32b241414da7d6b806?source=copy_link)
+- [AIPM Bench Figma UI](https://www.figma.com/design/NEyiquVyNR26AkhF6tbGcM/AIPM-Bench?node-id=0-1&t=SN8DHvEHVAHehX0w-1)
 
 ---
 
