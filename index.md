@@ -74,7 +74,7 @@ AIPM Bench是一个轻量级Web工具，让AI PM在10分钟内完成模型选型
 - 数据看板
 
 ### 完整BRD下载
-📎 [AIPM_Bench｜BRD.pdf]([./PRD.pdf](https://www.notion.so/AIPM-Bench-BRD-c31b1317da604ca79deda424be0fa667?source=copy_link))
+📎 [[./PRD.pdf](https://www.notion.so/AIPM-Bench-BRD-c31b1317da604ca79deda424be0fa667?source=copy_link)]
 
 ### 完整PRD下载
 📎 [AIPM_Bench｜PRD.pdf]([./PRD.pdf](https://www.notion.so/AIPM-Bench-PRD-48e3f7328ef14f32b241414da7d6b806?source=copy_link))
