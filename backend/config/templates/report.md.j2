@@ -1,0 +1,52 @@
+# 大模型性能对比报告 — Markdown 模板（Jinja2）
+# 修改本文件即可调整导出报告样式，无需改动 Python 业务代码。
+
+# {{ report_title }}
+
+- **生成时间**：{{ generated_at }}
+- **测试用例**：{{ test_case_summary }}（共 {{ test_case_count }} 条）
+- **总耗时**：{{ total_duration }}
+
+## 最佳推荐：{{ best_model }}
+
+{{ recommendation_reason }}
+
+## 模型对比
+
+{% for m in models %}
+### {{ m.name }}
+
+| 指标 | 值 |
+|------|-----|
+| 成功率 | {{ m.success_rate }} |
+| 平均耗时 | {{ m.avg_time }} |
+| 估算成本 | {{ m.cost }} |
+
+{% if m.pros %}
+**优势**
+{% for p in m.pros %}
+- {{ p }}
+{% endfor %}
+{% endif %}
+
+{% if m.cons %}
+**待改进**
+{% for c in m.cons %}
+- [{{ c.level }}] {{ c.text }}
+{% endfor %}
+{% endif %}
+
+#### 用例明细
+
+{% for tc in m.test_cases %}
+**用例：** {{ tc.input }}
+
+- 状态：{{ tc.status }} | 耗时：{{ tc.time }}
+- 回答：{{ tc.output[:500] }}{% if tc.output|length > 500 %}…{% endif %}
+
+{% endfor %}
+---
+{% endfor %}
+
+---
+*本报告由 AIPM Bench 自动生成*

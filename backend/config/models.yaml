@@ -1,0 +1,145 @@
+# NFR-M1：模型配置可扩展（新增模型仅需修改本文件，无需改业务代码）
+# API Key 仍仅保存在浏览器；此处不含密钥字段。
+
+version: 1
+
+global_defaults:
+  timeout_seconds: 60
+  max_tokens: 1024
+  temperature: 0.7
+  eval_max_tokens: 800
+  eval_timeout_seconds: 60
+  retry_max_attempts: 3
+  retry_base_delay_seconds: 1.5
+
+# 厂商适配器：定义请求格式、URL 规则、响应解析方式
+vendors:
+  deepseek:
+    adapter: openai_compatible
+    display_name: DeepSeek
+    default_base_url: https://api.deepseek.com
+    chat_path: /chat/completions
+    auth_header: "Bearer {{api_key}}"
+    response_content_paths:
+      - choices.0.message.content
+    model_aliases:
+      deepseek-v4-flash: deepseek-v4-flash
+      deepseek-v4-pro: deepseek-v4-pro
+      deepseek-chat: deepseek-chat
+      deepseek-reasoner: deepseek-reasoner
+
+  qwen:
+    adapter: dashscope
+    display_name: 通义千问
+    default_base_url: https://dashscope.aliyuncs.com/api/v1
+    native_path: /services/aigc/text-generation/generation
+    compatible_path: /compatible-mode/v1/chat/completions
+    auth_header: "Bearer {{api_key}}"
+    timeout_seconds: 60
+    response_content_paths:
+      - output.choices.0.message.content
+      - choices.0.message.content
+
+  spark:
+    adapter: openai_compatible
+    display_name: 讯飞星火
+    default_base_url: https://spark-api-open.xf-yun.com/v1
+    chat_path: /chat/completions
+    browser_proxy: true
+    timeout_seconds: 60
+    valid_models:
+      - lite
+      - pro
+      - pro-128k
+      - max
+      - max-32k
+      - ultra
+      - ultra-32k
+    default_model: lite
+
+  tencent:
+    adapter: openai_compatible
+    display_name: 腾讯混元
+    default_base_url: https://api.hunyuan.cloud.tencent.com/v1
+    chat_path: /chat/completions
+    default_model: hy3-preview
+    browser_proxy: true
+    timeout_seconds: 60
+
+  cursor:
+    adapter: openai_compatible
+    display_name: Cursor Pro
+    default_base_url: http://127.0.0.1:8765/v1
+    chat_path: /chat/completions
+    blocked_hosts:
+      - api.cursor.com
+      - cursor.com
+      - cursor.sh
+
+  openai_compatible:
+    adapter: openai_compatible
+    display_name: OpenAI 兼容
+    default_base_url: https://api.openai.com/v1
+    chat_path: /chat/completions
+
+# 预设模型列表（enabled=false 时不在前端展示）
+models:
+  - preset_id: deepseek_v4_flash
+    name: Deepseek-v4-flash
+    enabled: true
+    vendor: deepseek
+    api_endpoint: https://api.deepseek.com
+    api_model: deepseek-v4-flash
+    is_recommended: true
+    max_tokens: 1024
+    temperature: 0.7
+    timeout_seconds: 18
+    description: DeepSeek 官方 API，适合通用对话与评测
+
+  - preset_id: qwen_plus
+    name: Qwen-plus
+    enabled: true
+    vendor: qwen
+    api_endpoint: https://dashscope.aliyuncs.com/compatible-mode/v1
+    api_model: qwen-plus
+    is_recommended: false
+    max_tokens: 1024
+    temperature: 0.7
+    timeout_seconds: 60
+    description: 阿里云 DashScope 通义千问
+
+  - preset_id: spark_lite
+    name: 讯飞 SparkLite
+    enabled: true
+    vendor: spark
+    api_endpoint: https://spark-api-open.xf-yun.com/v1
+    api_model: lite
+    is_recommended: false
+    max_tokens: 1024
+    temperature: 0.7
+    timeout_seconds: 60
+    description: 讯飞星火 Lite 版本
+
+  - preset_id: hy3_preview
+    name: Hy3-preview
+    enabled: true
+    vendor: tencent
+    api_endpoint: https://api.hunyuan.cloud.tencent.com/v1
+    api_model: hy3-preview
+    is_recommended: false
+    max_tokens: 1024
+    temperature: 0.7
+    timeout_seconds: 60
+    description: 腾讯混元 Hy3 预览版
+
+  - preset_id: cursor_pro
+    name: Cursor-pro
+    enabled: false
+    vendor: cursor
+    api_endpoint: http://127.0.0.1:8765/v1
+    api_model: composer-2
+    is_recommended: false
+    max_tokens: 1024
+    temperature: 0.7
+    timeout_seconds: 30
+    description: 需本地 OpenAI 兼容代理，默认禁用
