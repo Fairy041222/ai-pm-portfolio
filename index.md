@@ -85,7 +85,7 @@ AIPM Bench是一个轻量级Web工具，让AI PM在10分钟内完成模型选型
 > 推荐模型 + 对比表 + 成本分析
 
 ### Figma可点击原型
-🔗 [AIPM Bench Figma](https://www.figma.com/design/NEyiquVyNR26AkhF6tbGcM/AIPM-Bench?node-id=0-1&t=SN8DHvEHVAHehX0w-1)
+🔗 [AIPM Bench Figma UI](https://www.figma.com/design/NEyiquVyNR26AkhF6tbGcM/AIPM-Bench?node-id=0-1&t=SN8DHvEHVAHehX0w-1)
 
 ### 关键交互说明
 
